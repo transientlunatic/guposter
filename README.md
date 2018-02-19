@@ -8,7 +8,7 @@ A very simple usage example is included as `demo.tex`.
 
 ## Example
 
-![A very basic example of the poster style](.assets/basic.png)
+![A very basic example of the poster style](.assets/demo.png)
 
 ## Installation
 
@@ -146,3 +146,9 @@ blue colour used in university publications has been called
 `university-rust`. The full list of colours can be found in the
 `uofg_colour.tex` file, or on the University's website. Other colours
 defined in the `xcolor` package can also be used.
+
+## Credits
+The "person" icon, used in place of photographs in the demo file is
+licensed under the Creative Commons Attribution-Share Alike 3.0
+Unported license, and was created for Font Awesome by Dave Gandy –
+http://fontawesome.io.
