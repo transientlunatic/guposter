@@ -1,0 +1,97 @@
+\documentclass{guposter}
+
+%%% Preamble
+
+\authors{
+  Author One, School of Physics and Astronomy, University of Glasgow, elder.jpg;
+  Author Two, School of Physics and Astronomy, University of Glasgow, watt.jpg;
+  Author Three, School of Somewhere Else, University of Otherplace, kelvin.jpg
+}
+
+\logos{logo.png,logo.png,logo.png}
+\title{A Glasgow University Poster}
+%\subtitle{Using Gaussian Processes to Motivate Numerical Relativity Simulations}
+
+
+\begin{document}
+\maketitle
+%\drawgrid
+
+%%%
+%%% Abstract
+%%%
+ 
+\begin{abstract}
+  \textrm{\textbf{This \LaTeX{} style file is intended to make producing
+      posters for conferences easy.} Where possible it attemptes to
+    stick roughly to the University of Glasgow's visual branding
+    guidelines, but makes some changes to suit the medium.\\[2em]
+    This text block is indicative of how the poster abstract would look
+    under the default configuration. There is space for some text, and
+    then to the right a space where an image or project logo could be
+    inserted.  }
+\end{abstract}
+
+ \begin{panel}{d0}{3}[university-burgundy]
+   {\Large \texttt{GUPoster} is designed around the concept of a ``grid''
+     system (and it was more directly inspired by HTML and CSS design
+     systems like \texttt{Bootstrap}), but with suitable modifications
+     for printing rather than on-screen design. }
+ \end{panel}
+
+ \begin{panel}{d4}{3}[red]
+   {\Large Simple text blocks can be defined with a position, and with
+     a width; on this row there are three equal-width blocks, but that
+     is not a requirement.}
+ \end{panel}
+
+ \begin{panel}{d8}{3}[university-rust]
+   {\Large The colour of the ribbon feature at the side of each text
+     box can also be cusomised easily, to allow subtle hinting at
+     related concepts across the page.}
+ \end{panel}
+ 
+ \begin{fillpanel}{g0}{5}[university-lavendar][black]
+   It's also possible to included ``filled'' panels, which have a
+   coloured background. These can be quite eye-catching, but it's
+   probably not a good idea to use more than one or two, as the
+   coloured background can reduce the readability (and thus the
+   accessibility) of the poster.
+ \end{fillpanel}
+
+  \begin{fillpanel}{h0}{5}[university-rust][white]
+   In order to not be too jarring, the background colour of these
+   panels is set to 50\% opacity, which should provide a more
+   pastel-esque esthetic to the poster.
+  \end{fillpanel}
+  
+  \begin{fillpanel}{i0}{3}[university-lawn][black]
+    There are many colours to choose from, but make sure that you
+    choose a foreground text colour which can be read above the
+    bakground.
+  \end{fillpanel}
+
+  \begin{fillpanel}{i3}{2}[university-cobalt][black]
+      Other than that, these panels are just a whole lot of fun.
+ \end{fillpanel}
+ 
+ \begin{panel}{g7}{4}
+   The design also allows for easy inclusion of author photographs,
+   and authors from multiple Institutions. Logo placement at the
+   bottom of the sheet is also handled automatically.
+ \end{panel}
+
+  \begin{panel}{i5}{6}
+    Each of the anchor points in the poster can be accessed directly
+    from tikz, so it's possible to easily add illustrations and more
+    complex graphical elements directly onto the page.
+    
+ \end{panel}
+
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw [ultra thick, university-rust] (k6) -- (k8) -- (j9) -- (p6);
+  \end{tikzpicture}
+  
+
+ 
+\end{document}
