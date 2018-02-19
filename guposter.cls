@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{guposter}[2017/09/06 v.0.1 A document class for making posters which approximately conform to UoG branding guidelines.]
 
-\PassOptionsToClass{\CurrentOption}{kentigern}
+%\PassOptionsToClass{\CurrentOption}{kentigern}
 %\documentclass{article}
 \LoadClass[final, t, mathserif]{beamer}
 \mode<presentation> {  %% check http://www-i6.informatik.rwth-aachen.de/~dreuw/latexbeamerposter.php for examples
@@ -9,8 +9,7 @@
   }
 \setbeamertemplate{bibliography item}{}
 \beamertemplatenavigationsymbolsempty
-\usepackage[orientation=portrait,size=a1,scale=0.7]{beamerposter}                       % e.g. for DIN-A0 poster
-%\usepackage[orientation=portrait,size=a1,scale=0.7]{beamerposter}                       % e.g. for DIN-A0 poster
+\usepackage[orientation=portrait,size=a1,scale=0.7]{beamerposter}
 \usepackage{amsthm, amsmath}
 \usepackage{natbib}
 \usepackage[T1]{fontenc}
@@ -24,8 +23,7 @@
 \usepackage{microtype}
 \usepackage{exscale}
 \usepackage{pgf, tikz}
-\usepackage{physicsplus}
-\usepackage{listings}
+%\usepackage{physicsplus}
 
 \usetikzlibrary{shapes,snakes}
 \usetikzlibrary{arrows,chains,matrix,positioning,scopes}
@@ -33,6 +31,7 @@
 
 \input{uog_colour}
 
+\definecolor{muted-cream}{HTML}{F2E5BD}
 
 \def\cw{\paperwidth/13}
 \def\rh{(\paperheight/26}
@@ -51,8 +50,27 @@
     \par%
 }%
 
-
-
+\AtBeginDocument{
+  \begin{tikzpicture}[overlay,remember picture, scale = 1]
+    
+    \coordinate (A) at (-1,2);
+    \coordinate (B) at (\paperwidth,2);
+    \coordinate (C) at (-1, -\paperheight);
+    \coordinate (D) at (\paperwidth, -\paperheight);
+    
+    
+    
+  \foreach \x in {0,...,13}{
+    \foreach \y [count=\i] in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v}{
+      \coordinate (\y\x) at (\margin+\cw*\x, -6.0cm - \rh*\i);
+    }
+  }
+  
+  \node (footer-a) at (1, -\paperheight*0.95) {};
+  \@logos
+  
+\end{tikzpicture}
+}
 \DeclareDocumentCommand \colbox { m }
 {
   \begin{tikzpicture}[scale=2]
@@ -140,14 +158,11 @@
 \DeclareDocumentCommand \maketitle {}
 {
 \begin{tikzpicture}[overlay, scale=1, remember picture]
-  \coordinate (A) at (-1,2);
-  \coordinate (B) at (\paperwidth,2);
-  \coordinate (C) at (-1, -\paperheight);
-  \coordinate (D) at (\paperwidth, -\paperheight);
+
   %\draw[help lines,step=20mm,gray!10] (A)+(0,-7.5) grid (D);
   % Draw the header box
   \fill[university-blue] (A) -- +(0, -8.5) -- +(\paperwidth, -8.5) -- (B) -- cycle; 
-  \fill[university-blue!82] (A)+(0, -8.4) -- +(0, -9) -- +(\paperwidth, -9) -- (\paperwidth, -6.4) -- cycle; 
+  \fill[university-blue!82] (A)+(0, -8.5) -- +(0, -9) -- +(\paperwidth, -9) -- +(\paperwidth, -8.5) -- cycle; 
   % Draw the titles
   \draw node (title) [yshift=-2.5cm, xshift=2cm, right, white]{\fontsize{85}{60}\selectfont{\@title}} 
         node (subtitle) [right = 1cm of title, yshift=-7.5mm, muted-cream, text width=30cm] {\fontsize{30}{60}\selectfont \@subtitle};
@@ -157,20 +172,9 @@
   \@authors
   % Insert the university logo
   % guidelines suggest this should be the colour keyline version.
-  \draw node (unilogo) at (\paperwidth-8.5cm, -3.0) [] {\includegraphics[width=10cm]{figures/UoG_keyline.pdf}};
-  % Draw the footer box
-  \node (footer-a) at (1, -\paperheight*0.95) {};
-  \@logos
+  \draw node (unilogo) at (\paperwidth-8.5cm, -3.0) [] {\includegraphics[width=10cm]{UoG_keyline.pdf}};
 \end{tikzpicture}
 \makeatother
-\begin{tikzpicture}[remember picture]
-
-  \foreach \x in {0, ..., 13}{
-    \foreach \y [count=\i] in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v}{
-      \coordinate (\y\x) at (\margin+\cw*\x, -6.0cm - \rh*\i);
-      }
-  }
-\end{tikzpicture}
 }
 %
 \NewEnviron{AbstractEnv}[1]
@@ -193,13 +197,28 @@
            {
              \begin{tikzpicture}[overlay, remember picture]
                \node at (#1)
-                     [below right, text width = \cw*#2]
+                     [below right, text width = \cw*#2-8mm]
                      {
                        \begin{tikzpicture}
-                         \node at (0,0) {\Large\BODY};
+                         \node at (0+5mm,0) {\Large\BODY};
                          \draw [line width=0.2cm, draw = #3]
                          (current bounding box.north west)+(-0.4cm, 0.2cm) --
                          (current bounding box.south west)+(-0.4cm, 0.5cm);
+                       \end{tikzpicture}
+                     };
+             \end{tikzpicture}
+           }%
+%
+\NewEnviron{FillPanelEnv}[4]
+           {
+             \begin{tikzpicture}[overlay, remember picture]
+               %\node at (#1) [above, text = #3] {\Huge #3}
+               \node at (#1)
+                     [fill = #3, fill opacity=0.5,
+                       below right, text width = \cw*#2-8mm]
+                     {
+                       \begin{tikzpicture}
+                         \node [text opacity = 1, text = #4] at (0+5mm,0) {\Large\BODY};
                        \end{tikzpicture}
                      };
              \end{tikzpicture}
@@ -223,11 +242,29 @@
   }{\endPanelEnv}
 
 \newcommand{\drawgrid}{
-  \begin{tikzpicture}[remember picture, overlay]
-     \foreach \x in {0,...,13}{
+  \begin{tikzpicture}[remember picture, scale=1]
+    \foreach \x in {0,...,13}{
        \foreach \y in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v}{
-         \node (\y\x) [white, fill=university-slate, opacity=0.0, circle] at (\y\x) {\y\x};
+
+           \node (\y\x) [overlay,text = white, fill=university-slate, opacity=1.0, circle] at (\y\x) {\y\x};
+
        }
      }
   \end{tikzpicture}
 }
+
+\DeclareDocumentEnvironment{fillpanel}{m m O{university-blue} O{black}}{%
+  %
+  % Make a panel element
+  %
+  % Arguments
+  % ---------
+  % #1 : mandatory
+  %    The location of the upper-left corner
+  % #2 : mandatory
+  %    The width of the element, in columns
+  % #3 : optional
+  %    The colour of the panel, defaults to blue.
+  \FillPanelEnv{#1}{#2}{#3}{#4}
+  }{\endFillPanelEnv}
+

@@ -6,6 +6,6 @@
 # copyright, and only available to download on the University campus
 # or through the VPN system.
 
-wget http://www.gla.ac.uk/t4/visualidentity/files/downloads/University%20marque/UoG_keyline.eps
+curl https://www.gla.ac.uk/t4/visualidentity/files/downloads/University%20marque/UoG_keyline.eps --output UoG_keyline.eps
 epspdf UoG_keyline.eps
 rm UoG_keyline.eps
