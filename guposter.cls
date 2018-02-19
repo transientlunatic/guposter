@@ -177,10 +177,10 @@
            {
              \begin{tikzpicture}[overlay, remember picture]
                \node at (#1)
-                     [below right, text width=0.4\paperwidth]
+                     [below right, text width=0.5\paperwidth]
                      {
                        \begin{tikzpicture}
-                         \node at (0,0) {\BODY};
+                         \node at (0,0) {\Large\BODY};
                          \draw [line width=0.2cm, draw = university-pumpkin]
                          (current bounding box.north west)+(-0.4cm, 0.2cm) --
                          (current bounding box.south west)+(-0.4cm, 0.5cm);
@@ -196,7 +196,7 @@
                      [below right, text width = \cw*#2]
                      {
                        \begin{tikzpicture}
-                         \node at (0,0) {\BODY};
+                         \node at (0,0) {\Large\BODY};
                          \draw [line width=0.2cm, draw = #3]
                          (current bounding box.north west)+(-0.4cm, 0.2cm) --
                          (current bounding box.south west)+(-0.4cm, 0.5cm);
@@ -226,7 +226,7 @@
   \begin{tikzpicture}[remember picture, overlay]
      \foreach \x in {0,...,13}{
        \foreach \y in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v}{
-         \node (\y\x) [white, fill=university-slate, opacity=0.5, circle] at (\y\x) {\y\x};
+         \node (\y\x) [white, fill=university-slate, opacity=0.0, circle] at (\y\x) {\y\x};
        }
      }
   \end{tikzpicture}
